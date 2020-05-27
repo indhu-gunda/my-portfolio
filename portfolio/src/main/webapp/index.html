@@ -2,17 +2,72 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <title>Indhu's Portfolio</title>
+    <!-- add bootstrap css file -->
+    <link 
+      rel="stylesheet" 
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+      crossorigin="anonymous"
+      >
+    <link rel="stylesheet" type="text/css" href="css/main.css">
   </head>
   <body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top ">
+      <a class="navbar-brand" href="#">Home</a>
+      <button 
+        class="navbar-toggler" 
+        type="button" 
+        data-toggle="collapse" 
+        data-target="#navbarSupportedContent" 
+        aria-controls="navbarSupportedContent" 
+        aria-expaneded="false" 
+        aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse " id="navbarSupportedContent">
+          <ul class="navbar-nav mr-4">
+
+            <li class="nav-item">
+              <a class="nav-link" data-value="about" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-value="experience" href="#">Experience</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" data-value="blog" href="#">Blog</a>
+            </li>
+
+          </ul>
+      </div>
+    </nav>
+
+    <!-- header -->
+    <header class="header">
+      <div class="overlay container description">
+        <h3 class="text-center"> HELLO, MY NAME IS </h3>
+        <h1 class="text-center"> INDHU GUNDA </h1>
+      </div>
+    </header>
+
     <div id="content">
-      <h1>My Portfolio</h1>
+      <h1>About Me!</h1>
       <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+      <img src="images/profile.jpg"/>
+      <p>Click here to get a random fact about me:</p>
+      <button onclick="addRandomFact()">Random Fact!</button>
+      <div id="fact-container"></div>
+      <p>Hi, I'm Indhu Gunda! I'm an incoming junior in Electrical and Computer Engineering at the University of Texas at Austin. Some of my hobbies include reading, handlettering, and watching TV. My all time favorite TV show is White Collar.</p>
     </div>
+  
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <!-- add Javascript file from js file -->
+  <script type="text/javascript" src="js/main.js"></script>
   </body>
 </html>
