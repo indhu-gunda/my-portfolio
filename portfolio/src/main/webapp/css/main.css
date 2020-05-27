@@ -10,13 +10,46 @@
 
 .navbar-toggler{background: #FFF !important;}
 
+/* header style */
+.header{
+  background-image: url('../images/header.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+.overlay{
+  position: absolute;
+  min-height: 100%;
+  min-width: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(160, 160, 160, 0.5);
+}
+
+.description{
+  position: absolute;
+  top: 30%;
+  margin: auto;
+  text-align: center;
+}
+
+.description h1{
+  color: #F2EBE3;
+  text-align: center;
+}
+
+.description h3{
+  color: #F2EBE3;
+}
+
 #content {
   margin-left: auto;
   margin-right: auto;
   width: 650px;
 }
 
-#greeting-container {
+#fact-container {
   margin-top: 20px;
 }
 
