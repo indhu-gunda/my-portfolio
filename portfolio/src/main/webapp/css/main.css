@@ -57,6 +57,35 @@
   color: #F2EBE3;
 }
 
+/* about style */
+.about{
+  margin: 4em 0;
+  padding: 1em;
+  position: relative;
+}
+
+.about h1{
+  color: #6A788D;
+  margin: 2em;
+}
+
+.about img{
+  height: 100%;
+  border-radius: 50%;
+}
+
+.about .desc{
+ padding: 2em;
+ border-left:4px solid #5B5B57;
+}
+.about .desc h3{
+ color: #10828C;
+}
+.about .desc p{
+ line-height:2;
+ color:#888;
+}
+
 #content {
   margin-left: auto;
   margin-right: auto;
