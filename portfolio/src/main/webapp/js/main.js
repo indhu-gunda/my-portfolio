@@ -11,13 +11,18 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+$(document).ready(function(){
+  $('.header').height($(window).height());
+})
 
 /**
  * Adds a random fact to the page.
  */
 function addRandomFact() {
   const facts =
-      ['My favorite dessert is ricotta cheesecake.', 'It is on my bucket list to see the Aurora Borelis.', 'My favorite place that I have visited is Switzerland'];
+      ['My favorite dessert is ricotta cheesecake.', 
+        'It is on my bucket list to see the Aurora Borelis.', 
+        'My favorite place that I have visited is Switzerland'];
 
   // Pick a random greeting.
   const fact = facts[Math.floor(Math.random() * facts.length)];
