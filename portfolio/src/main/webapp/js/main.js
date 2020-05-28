@@ -13,21 +13,11 @@
 // limitations under the License.
 $(document).ready(function(){
   $('.header').height($(window).height());
+
+  $(".navbar a").click(function(){
+    $("body,html").animate({
+      scrollTop:$("#" + $(this).data('value')).offset().top
+    },1000)
+  
+  })
 })
-
-/**
- * Adds a random fact to the page.
- */
-function addRandomFact() {
-  const facts =
-      ['My favorite dessert is ricotta cheesecake.', 
-        'It is on my bucket list to see the Aurora Borelis.', 
-        'My favorite place that I have visited is Switzerland'];
-
-  // Pick a random greeting.
-  const fact = facts[Math.floor(Math.random() * facts.length)];
-
-  // Add it to the page.
-  const factContainer = document.getElementById('fact-container');
-  factContainer.innerText = fact;
-}

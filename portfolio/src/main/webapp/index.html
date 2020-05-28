@@ -38,7 +38,7 @@
               <a class="nav-link" data-value="experience" href="#">Experience</a>
             </li>
              <li class="nav-item">
-              <a class="nav-link" data-value="blog" href="#">Blog</a>
+              <a class="nav-link" data-value="artwork" href="#">Artwork</a>
             </li>
 
           </ul>
@@ -46,7 +46,7 @@
     </nav>
 
     <!-- header -->
-    <header class="header">
+    <header class="header" id="home">
       <div class="overlay"></div>
       <div class="container description">
         <h3 class="text-center"> HELLO, MY NAME IS </h3>
@@ -72,7 +72,6 @@
 
     <!-- experience section -->
     <div class="experience" id="experience">
-      <div class="overlay"></div>
       <div class="container">
         <h1 class="text-center">Experience</h1>
         <div class="row card-deck">
@@ -123,6 +122,47 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- artwork section -->
+    <div class="artwork" id="artwork">
+      <h1 class="text-center">Artwork</h1>
+      <div id="myCarousel" class="carousel slide container" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+          <li data-target="#myCarousel" data-slide-to="3"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="images/moon.JPG" alt="moon" class="img-fluid">
+          </div>
+
+          <div class="carousel-item">
+            <img src="images/dandelion.JPG" alt="dandelion" class="img-fluid">
+          </div>
+
+          <div class="carousel-item">
+            <img src="images/tree.JPG" alt="tree" class="img-fluid">
+          </div>
+
+          <div class="carousel-item">
+            <img src="images/cottoncandy.JPG" alt="cottoncandy" class="img-fluid">
+          </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </a>
       </div>
     </div>
   
