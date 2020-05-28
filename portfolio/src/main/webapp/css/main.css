@@ -48,13 +48,9 @@
   text-align: center;
 }
 
-.description h1{
-  color: #F2EBE3;
+.description h1, h3{
+  color: #f2ebe3;
   text-align: center;
-}
-
-.description h3{
-  color: #F2EBE3;
 }
 
 /* about style */
@@ -65,72 +61,72 @@
 }
 
 .about h1{
-  color: #6A788D;
+  color: #6a788d;
   margin: 2em;
 }
 
 .about img{
-  height: 100%;
   border-radius: 50%;
 }
 
 .about .desc{
  padding: 2em;
- border-left:4px solid #5B5B57;
+ border-left: 4px solid #5b5b57;
 }
 .about .desc h3{
- color: #10828C;
+ color: #10828c;
 }
 .about .desc p{
- line-height:2;
+ line-height: 2;
  color:#888;
 }
 
-/* header style */
-.header{
+/* experience style */
+.experience{
+  margin: 4em 0;
+  padding: 1em;
+  position: relative;
   background-image: url('../images/header.jpg');
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
 }
 
-.overlay{
-  position: absolute;
-  min-height: 100%;
-  min-width: 100%;
-  left: 0;
-  top: 0;
-  background: rgba(160, 160, 160, 0.5);
+.experience h1{
+  color: #f2ebe3;
+  margin: 2em;
 }
 
-.description{
-  position: absolute;
-  top: 30%;
-  margin: auto;
+.experience .card{
+  box-shadow: 0 0 20px #cccccc;
+  margin: 1em;
+  padding: 0;
+}
+
+.experience .card-title{
+  color: #10828c;
   text-align: center;
 }
 
-.description h1{
-  color: #F2EBE3;
+.experience .card-subtitle{
+  color: #6a788d;
   text-align: center;
+  padding-bottom: 1em;
+  border-bottom: 2px solid #5b5b57;
 }
 
-.description h3{
-  color: #F2EBE3;
+.experience .card-body{
+  padding: 1em;
 }
 
-#content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
+.experience .card-body ul{
+  padding: 1em;
+  color: #888
 }
 
-#fact-container {
-  margin-top: 20px;
-}
-
-img {
-  margin: 10px;
-  max-height: 200px;
-  max-width: 200px;
+.experience .card-header, .card-footer{
+  color: #f2ebe3;
+  text-align: center;
+  width: 100%;
+  background: #6a788d;
 }
