@@ -86,14 +86,10 @@
   margin: 4em 0;
   padding: 1em;
   position: relative;
-  background-image: url('../images/header.jpg');
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
 }
 
 .experience h1{
-  color: #f2ebe3;
+  color: #6a788d;
   margin: 2em;
 }
 
@@ -129,4 +125,27 @@
   text-align: center;
   width: 100%;
   background: #6a788d;
+}
+
+/* artwork style */
+.artwork{
+  margin: 4em 0;
+  padding: 1em;
+  position: relative;
+}
+
+.artwork h1{
+  color: #6a788d;
+  margin: 2em;
+}
+
+.artwork .container{
+  background: #5b5b57;
+}
+
+.artwork img{
+  display: block;
+  height: 50%;
+  width: 50%;
+  margin: auto;
 }
