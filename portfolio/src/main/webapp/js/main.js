@@ -14,20 +14,3 @@
 $(document).ready(function(){
   $('.header').height($(window).height());
 })
-
-/**
- * Adds a random fact to the page.
- */
-function addRandomFact() {
-  const facts =
-      ['My favorite dessert is ricotta cheesecake.', 
-        'It is on my bucket list to see the Aurora Borelis.', 
-        'My favorite place that I have visited is Switzerland'];
-
-  // Pick a random greeting.
-  const fact = facts[Math.floor(Math.random() * facts.length)];
-
-  // Add it to the page.
-  const factContainer = document.getElementById('fact-container');
-  factContainer.innerText = fact;
-}
