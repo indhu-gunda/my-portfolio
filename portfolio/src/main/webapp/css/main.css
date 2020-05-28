@@ -11,7 +11,7 @@
     margin-right: 1em !important;
 }
 
-.nav-link:hover{
+.nav-link:hover, .navbar-brand:hover{
     background: #f2ebe3; 
     color: #6a788d;
 }
