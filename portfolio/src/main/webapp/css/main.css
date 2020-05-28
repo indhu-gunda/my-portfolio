@@ -48,27 +48,85 @@
   text-align: center;
 }
 
-.description h1{
-  color: #F2EBE3;
+.description h1, h3{
+  color: #f2ebe3;
   text-align: center;
 }
 
-.description h3{
-  color: #F2EBE3;
+/* about style */
+.about{
+  margin: 4em 0;
+  padding: 1em;
+  position: relative;
 }
 
-#content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
+.about h1{
+  color: #6a788d;
+  margin: 2em;
 }
 
-#fact-container {
-  margin-top: 20px;
+.about img{
+  border-radius: 50%;
 }
 
-img {
-  margin: 10px;
-  max-height: 200px;
-  max-width: 200px;
+.about .desc{
+ padding: 2em;
+ border-left: 4px solid #5b5b57;
+}
+.about .desc h3{
+ color: #10828c;
+}
+.about .desc p{
+ line-height: 2;
+ color:#888;
+}
+
+/* experience style */
+.experience{
+  margin: 4em 0;
+  padding: 1em;
+  position: relative;
+  background-image: url('../images/header.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+.experience h1{
+  color: #f2ebe3;
+  margin: 2em;
+}
+
+.experience .card{
+  box-shadow: 0 0 20px #cccccc;
+  margin: 1em;
+  padding: 0;
+}
+
+.experience .card-title{
+  color: #10828c;
+  text-align: center;
+}
+
+.experience .card-subtitle{
+  color: #6a788d;
+  text-align: center;
+  padding-bottom: 1em;
+  border-bottom: 2px solid #5b5b57;
+}
+
+.experience .card-body{
+  padding: 1em;
+}
+
+.experience .card-body ul{
+  padding: 1em;
+  color: #888
+}
+
+.experience .card-header, .card-footer{
+  color: #f2ebe3;
+  text-align: center;
+  width: 100%;
+  background: #6a788d;
 }
