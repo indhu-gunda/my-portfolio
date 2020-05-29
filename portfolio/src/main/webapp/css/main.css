@@ -3,7 +3,7 @@
 }
 
 .nav-link, .navbar-brand{
-    color:#f2ebe3; 
+    color:#ffffff; 
     cursor: pointer;
 }
 
@@ -12,7 +12,7 @@
 }
 
 .nav-link:hover, .navbar-brand:hover{
-    background: #f2ebe3; 
+    background: #ffffff; 
     color: #6a788d;
 }
 
@@ -26,14 +26,14 @@
 
 /* header style */
 .header{
-  background-image: url('../images/header.jpg');
+  background-image: url('../images/texture.jpg');
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
 }
 
 .overlay{
-  position: absolute;
+  position: relative;
   min-height: 100%;
   min-width: 100%;
   left: 0;
@@ -43,14 +43,15 @@
 
 .description{
   position: absolute;
-  top: 30%;
+  top: 10%;
   margin: auto;
   text-align: center;
 }
 
-.description h1, h3{
-  color: #f2ebe3;
-  text-align: center;
+.description img{
+  display: block;
+  margin: auto;
+  width: 50%;
 }
 
 /* about style */
@@ -121,7 +122,7 @@
 }
 
 .experience .card-header, .card-footer{
-  color: #f2ebe3;
+  color: #ffffff;
   text-align: center;
   width: 100%;
   background: #6a788d;
