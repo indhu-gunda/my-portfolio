@@ -1,3 +1,8 @@
+ @import url('https://fonts.googleapis.com/css?family=Roboto');
+
+html,h1,h2,h3,h4,h5,h6,a{
+	font-family: "Roboto";
+}
 .navbar{
     background: #6a788d;
 }
@@ -26,19 +31,10 @@
 
 /* header style */
 .header{
-  background-image: url('../images/texture.jpg');
+  background-image: url('../images/backdrop.JPG');
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
-}
-
-.overlay{
-  position: relative;
-  min-height: 100%;
-  min-width: 100%;
-  left: 0;
-  top: 0;
-  background: rgba(160, 160, 160, 0.5);
 }
 
 .description{
@@ -54,6 +50,23 @@
   width: 50%;
 }
 
+.description .fa{
+  padding: 0.5em;
+  font-size: 2.5em;
+  width: auto;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
+  background: #6a788d;
+  color: white;
+  margin: 0.5em;
+  opacity: 0.8;
+}
+
+.description .fa:hover{
+  opacity: 0.5;
+}
+
 /* about style */
 .about{
   margin: 4em 0;
@@ -62,7 +75,7 @@
 }
 
 .about h1{
-  color: #6a788d;
+  color: #5b5b57;
   margin: 2em;
 }
 
@@ -75,7 +88,7 @@
  border-left: 4px solid #5b5b57;
 }
 .about .desc h3{
- color: #10828c;
+ color: #6a788d;
 }
 .about .desc p{
  line-height: 2;
@@ -87,10 +100,11 @@
   margin: 4em 0;
   padding: 1em;
   position: relative;
+  background: #f1ded7;
 }
 
 .experience h1{
-  color: #6a788d;
+  color: #5b5b57;
   margin: 2em;
 }
 
@@ -101,7 +115,7 @@
 }
 
 .experience .card-title{
-  color: #10828c;
+  color: #6a788d;
   text-align: center;
 }
 
@@ -125,7 +139,7 @@
   color: #ffffff;
   text-align: center;
   width: 100%;
-  background: #6a788d;
+  background: #5b5b57;
 }
 
 /* artwork style */
