@@ -21,3 +21,9 @@ $(document).ready(function(){
   
   })
 })
+
+function getMessage() {
+  fetch('/message').then(response => response.text()).then((message) => {
+    document.getElementById('message-container').innerText = message;
+  });
+}
