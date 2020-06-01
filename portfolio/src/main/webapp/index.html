@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
   </head>
-  <body>
+  <body onload="getComments()">
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg fixed-top ">
       <a class="navbar-brand" href="#">Home</a>
@@ -169,12 +169,10 @@
         </a>
       </div>
 
-      <!-- Message section -->
+      <!-- Comments section -->
       <div id="content">
-        <h1>Message</h1>
-          <p>Click here to see a message:</p>
-          <button onclick="getMessage()">Fetch a message!</button>
-          <div id="message-container"></div>
+        <h1>Comments</h1>
+        <ul id="comments-container"></ul>
       </div>
     </div>
   
