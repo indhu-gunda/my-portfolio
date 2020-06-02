@@ -170,8 +170,14 @@
       </div>
 
       <!-- Comments section -->
-      <div id="content">
+      <div name="comments" id="comments">
         <h1>Comments</h1>
+            <form action="/data" method="POST">
+              <h4>New Comment:</h4>
+              <textarea name="text-input"></textarea>
+              <br/><br/>
+              <input type="submit" />
+            </form>
         <ul id="comments-container"></ul>
       </div>
     </div>
