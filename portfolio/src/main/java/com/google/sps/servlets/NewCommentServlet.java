@@ -14,42 +14,30 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import java.io.IOException;
-import com.google.gson.Gson;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/data")
-public class DataServlet extends HttpServlet {
-
-  private List<String> comments;
-  private Gson gson;
-
-  @Override
-  public void init() {
-    comments = new ArrayList<>();
-    gson = new Gson();
-  }
-
-  @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String json = gson.toJson(comments);
-    response.setContentType("application/json");
-    response.getWriter().println(json);
-  }
-
+@WebServlet("/new-comment")
+public class NewCommentServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String comment = request.getParameter("text-input");
-    if (comment != null) {
-      comments.add(comment);
-      response.setContentType("text/html");
-      response.getWriter().println(comment);
+    String message = request.getParameter("text-input");
+    if (message != null) {
+      long timestamp = System.currentTimeMillis();
+
+      Entity commentEntity = new Entity("Comment");
+      commentEntity.setProperty("message", message);
+      commentEntity.setProperty("timestamp", timestamp);
+
+      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+      datastore.put(commentEntity);
     }
     response.sendRedirect("/index.html#comments");
   }

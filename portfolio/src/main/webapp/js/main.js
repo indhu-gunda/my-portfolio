@@ -23,11 +23,11 @@ $(document).ready(function(){
 })
 
 function getComments() {
-  fetch('/data').then(response => response.json()).then((comments) => {
+  fetch('/list-comments').then(response => response.json()).then((comments) => {
     const commentsListElement = document.getElementById('comments-container');
     commentsListElement.innerHTML = '';
     comments.forEach(comment => {
-      commentsListElement.appendChild(createListElement(comment));
+      commentsListElement.appendChild(createListElement(comment.message));
     });
   });
 }
