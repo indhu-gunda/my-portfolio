@@ -28,10 +28,12 @@ import javax.servlet.http.HttpServletResponse;
 public class DataServlet extends HttpServlet {
 
   private List<String> comments;
+  private Gson gson;
 
   @Override
   public void init() {
     comments = new ArrayList<>();
+    gson = new Gson();
     comments.add(
         "A ship in port is safe, but that is not what ships are for. "
             + "Sail out to sea and do new things. - Grace Hopper");
@@ -51,18 +53,9 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String json = convertToJsonUsingGson(comments);
-    response.setContentType("application/json;");
+    String json = gson.toJson(comments);
+    response.setContentType("application/json");
     response.getWriter().println(json);
-  }
-
-  /**
-  * Converts an ArrayList instance into a JSON string using the Gson library.
-  */
-  private String convertToJsonUsingGson(List comments) {
-      Gson gson = new Gson();
-      String json = gson.toJson(comments);
-      return json;
   }
 
 }
