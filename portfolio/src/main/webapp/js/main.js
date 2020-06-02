@@ -22,8 +22,19 @@ $(document).ready(function(){
   })
 })
 
-function getMessage() {
-  fetch('/message').then(response => response.text()).then((message) => {
-    document.getElementById('message-container').innerText = message;
+function getComments() {
+  fetch('/data').then(response => response.json()).then((comments) => {
+    const commentsListElement = document.getElementById('comments-container');
+    commentsListElement.innerHTML = '';
+    comments.forEach(comment => {
+      commentsListElement.appendChild(createListElement(comment));
+    });
   });
+}
+
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }
