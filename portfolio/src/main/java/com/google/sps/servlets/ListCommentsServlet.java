@@ -54,6 +54,5 @@ public class ListCommentsServlet extends HttpServlet {
 
     response.setContentType("application/json");
     response.getWriter().println(gson.toJson(comments));
-    System.out.println("sent");
   }
 }
