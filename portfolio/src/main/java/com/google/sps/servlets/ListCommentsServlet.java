@@ -67,8 +67,10 @@ public class ListCommentsServlet extends HttpServlet {
     String maxNumCommentsString = request.getParameter("max");
     int maxNumComments;
     try {
-      maxNumComments = Integer.parseInt(maxNumComments);
+      maxNumComments = Integer.parseInt(maxNumCommentsString);
     } catch (NumberFormatException e) {
       return DEFAULT_MAX_NUM_COMMENTS;
     }
+    return maxNumComments;
+  }
 }
