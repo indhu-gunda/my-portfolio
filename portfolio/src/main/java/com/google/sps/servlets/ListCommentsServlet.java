@@ -20,41 +20,57 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.FetchOptions;
+import com.google.appengine.api.datastore.FetchOptions.Builder;
 import com.google.gson.Gson;
 import com.google.sps.data.Comment;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+
 /** Servlet responsible for listing tasks. */
 @WebServlet("/list-comments")
 public class ListCommentsServlet extends HttpServlet {
 
+  private static final Gson gson = new Gson();
+  private static final int DEFAULT_MAX_NUM_COMMENTS = 5;
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    int maxNumComments = getMaxNumOfComments(request);
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
-
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    PreparedQuery results = datastore.prepare(query);
+    List<Entity> results = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(maxNumComments));
 
-    List<Comment> comments = new ArrayList<>();
-    for (Entity entity : results.asIterable()) {
-      long id = entity.getKey().getId();
-      String message = (String) entity.getProperty("message");
-      long timestamp = (long) entity.getProperty("timestamp");
-      if (message != null) {
-        Comment comment = new Comment(id, message, timestamp);
-        comments.add(comment);
-      }
-    }
-
-    Gson gson = new Gson();
+    List<Comment> comments =
+    results.stream()
+    .filter(entity -> entity.hasProperty("message"))
+    .map(entity -> new Comment(entity.getKey().getId(), (String) entity.getProperty("message"), (long) entity.getProperty("timestamp")))
+    .collect(Collectors.toList());
 
     response.setContentType("application/json");
     response.getWriter().println(gson.toJson(comments));
+  }
+
+  /**
+  *@return the max number of comments parameter of the request or DEFAULT_MAX_NUM_COMMENTS if invalid. 
+  */
+  private int getMaxNumOfComments(HttpServletRequest request) {
+    String maxNumCommentsString = request.getParameter("max");
+    int maxNumComments;
+    try {
+      maxNumComments = Integer.parseInt(maxNumCommentsString);
+    } catch (NumberFormatException e) {
+      return DEFAULT_MAX_NUM_COMMENTS;
+    }
+    return maxNumComments;
   }
 }

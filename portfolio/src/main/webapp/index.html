@@ -172,12 +172,19 @@
       <!-- Comments section -->
       <div name="comments" id="comments">
         <h1>Comments</h1>
-            <form action="/new-comment" method="POST">
-              <h4>New Comment:</h4>
-              <textarea name="text-input"></textarea>
-              <br/><br/>
-              <input type="submit" />
-            </form>
+        <form action="/new-comment" method="POST">
+          <h4>New Comment:</h4>
+          <textarea name="text-input"></textarea>
+          <br/><br/>
+          <input type="submit" />
+        </form>
+        <label for="number of comments">Choose number of comments to be displayed:</label>
+        <select id="number of comments" name="number of comments">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+        </select>
+        <input type="submit" onclick=getComments()>
         <ul id="comments-container"></ul>
       </div>
     </div>
