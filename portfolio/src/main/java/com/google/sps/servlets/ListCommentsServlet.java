@@ -34,14 +34,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+
 /** Servlet responsible for listing tasks. */
 @WebServlet("/list-comments")
 public class ListCommentsServlet extends HttpServlet {
 
   private static final Gson gson = new Gson();
+  private static final int DEFAULT_MAX_NUM_COMMENTS = 5;
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    int maxNumComments = Integer.parseInt(request.getParameter("max"));
+    int maxNumComments = getMaxNumOfComments(request);
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     List<Entity> results = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(maxNumComments));
@@ -54,6 +58,17 @@ public class ListCommentsServlet extends HttpServlet {
 
     response.setContentType("application/json");
     response.getWriter().println(gson.toJson(comments));
-    System.out.println("sent");
   }
+
+  /**
+  *@return the max number of comments parameter of the request or DEFAULT_MAX_NUM_COMMENTS if invalid. 
+  */
+  private int getMaxNumOfComments(HttpServletRequest request) {
+    String maxNumCommentsString = request.getParameter("max");
+    int maxNumComments;
+    try {
+      maxNumComments = Integer.parseInt(maxNumComments);
+    } catch (NumberFormatException e) {
+      return DEFAULT_MAX_NUM_COMMENTS;
+    }
 }

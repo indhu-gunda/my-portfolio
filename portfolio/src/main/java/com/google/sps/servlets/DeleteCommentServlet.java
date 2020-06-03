@@ -34,6 +34,23 @@ public class DeleteCommentServlet extends HttpServlet {
 
     Key commentEntityKey = KeyFactory.createKey("Comment", id);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    datastore.delete(commentEntityKey);
+    try {
+      datastore.delete(commentEntityKey);
+    } catch(IllegalArgumentException e) {
+      response.sendError(400, "Invalid comment ID.")
+    }
   }
+
+  /**
+  *@return the comment id parameter of the request or -1 if invalid and set error code. 
+  */
+  private long getCommentID(HttpServletRequest request) {
+    String commentIDString = request.getParameter("id");
+    long commentID;
+    try {
+      commentID = Long.parseLong(commentIDString);
+    } catch (NumberFormatException e) {
+      response.sendError(400, "Invalid comment ID format.")
+      return -1;
+    }
 }
