@@ -58,6 +58,7 @@ function createCommentElement(comment) {
   deleteIconElement.className = 'material-icons delete col-lg-1 col-md-1 col-sm-1'
   deleteIconElement.innerText = 'close';
   deleteButtonElement.appendChild(deleteIconElement);
+
   deleteButtonElement.addEventListener('click', () => {
     deleteComment(comment);
 
