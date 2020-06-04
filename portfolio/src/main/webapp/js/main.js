@@ -23,7 +23,7 @@ $(document).ready(function(){
 })
 
 function getComments() {
-  let max = document.getElementById('number of comments').value;
+  let max = document.getElementById('num-comments').value;
   fetch('/list-comments?max=' + max).then(response => response.json()).then((comments) => {
     const commentsListElement = document.getElementById('comments-container');
     commentsListElement.innerHTML = '';
@@ -36,13 +36,28 @@ function getComments() {
 /** Creates an element that represents a comment, including its delete button. */
 function createCommentElement(comment) {
   const commentElement = document.createElement('li');
-  commentElement.className = 'comment';
+  commentElement.className = 'row align-items-center';
 
-  const messageElement = document.createElement('span');
+  const profileElement = document.createElement('i');
+  profileElement.className = 'material-icons account col-lg-1 col-md-1 col-sm-1';
+  profileElement.innerText = 'account_circle';
+
+  const messageBoxElement = document.createElement('div');
+  messageBoxElement.className = 'col-lg-10 col-md-10 col-sm-10'
+  const nameElement = document.createElement('p');
+  nameElement.className = 'name';
+  nameElement.innerText = comment.name;
+  const messageElement = document.createElement('p');
+  messageElement.className = 'message';
   messageElement.innerText = comment.message;
+  messageBoxElement.appendChild(nameElement);
+  messageBoxElement.appendChild(messageElement);
 
   const deleteButtonElement = document.createElement('button');
-  deleteButtonElement.innerText = 'Delete';
+  const deleteIconElement = document.createElement('i')
+  deleteIconElement.className = 'material-icons delete col-lg-1 col-md-1 col-sm-1'
+  deleteIconElement.innerText = 'close';
+  deleteButtonElement.appendChild(deleteIconElement);
   deleteButtonElement.addEventListener('click', () => {
     deleteComment(comment);
 
@@ -50,7 +65,8 @@ function createCommentElement(comment) {
     commentElement.remove();
   });
 
-  commentElement.appendChild(messageElement);
+  commentElement.appendChild(profileElement);
+  commentElement.appendChild(messageBoxElement);
   commentElement.appendChild(deleteButtonElement);
   return commentElement;
 }

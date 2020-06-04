@@ -28,11 +28,13 @@ import javax.servlet.http.HttpServletResponse;
 public class NewCommentServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String name = request.getParameter("name-input");
     String message = request.getParameter("text-input");
     if (message != null) {
       long timestamp = System.currentTimeMillis();
 
       Entity commentEntity = new Entity("Comment");
+      commentEntity.setProperty("name", name);
       commentEntity.setProperty("message", message);
       commentEntity.setProperty("timestamp", timestamp);
 

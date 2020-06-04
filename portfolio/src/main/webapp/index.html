@@ -11,6 +11,7 @@
       crossorigin="anonymous"
       >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="css/main.css">
   </head>
   <body onload="getComments()">
@@ -168,24 +169,35 @@
           <span class="carousel-control-next-icon"></span>
         </a>
       </div>
+    </div>
 
-      <!-- Comments section -->
-      <div name="comments" id="comments">
-        <h1>Comments</h1>
-        <form action="/new-comment" method="POST">
-          <h4>New Comment:</h4>
-          <textarea name="text-input"></textarea>
-          <br/><br/>
-          <input type="submit" />
+    <!-- Comments section -->
+    <div name="comments" class="comments" id="comments">
+      <h1 class="text-center">Comments</h1>
+      <div class="container">
+        <form action="/new-comment" method="POST" class="new-comment-form">
+          <ul>
+            <li class="row comment">
+              <textarea name="name-input" placeholder="Name"></textarea>
+            </li>
+            <li class="row comment new-comment">
+              <textarea name="text-input" placeholder="Share your thoughts ..."></textarea>
+            </li>
+            <li class="row submit">
+              <input type="submit"/>
+            </li>
+          </ul>
+        </form class="num-comments-form">
+          <label for="num-comments">Choose number of comments to be displayed:</label>
+          <select id="num-comments" name="num-comments">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+          </select>
+          <input type="submit" class="submit" onclick=getComments()>
         </form>
-        <label for="number of comments">Choose number of comments to be displayed:</label>
-        <select id="number of comments" name="number of comments">
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="15">15</option>
-        </select>
-        <input type="submit" onclick=getComments()>
-        <ul id="comments-container"></ul>
+        <ul class= "comments-container" id="comments-container">
+        </ul>
       </div>
     </div>
   
