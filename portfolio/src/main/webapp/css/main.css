@@ -203,6 +203,12 @@ html,h1,h2,h3,h4,h5,h6,a{
   margin-right: 2em;
 }
 
+.comments select{
+  border: none;
+  color: #5b5b57;
+  margin-right: 0.5em;
+}
+
 .comments ul{
   list-style-type: none;
   padding: 0;
@@ -210,12 +216,6 @@ html,h1,h2,h3,h4,h5,h6,a{
 
 .comments label{
   color: #5b5b57;
-}
-
-.comments .num-comments-form input{
-  background: #6a788d;
-  border: none;
-  color: white;
 }
 
 .comments .comments-container li{

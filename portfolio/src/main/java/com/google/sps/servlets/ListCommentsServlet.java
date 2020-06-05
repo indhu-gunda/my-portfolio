@@ -36,41 +36,46 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-/** Servlet responsible for listing tasks. */
+/** Servlet responsible for listing comments. */
 @WebServlet("/list-comments")
 public class ListCommentsServlet extends HttpServlet {
 
   private static final Gson gson = new Gson();
   private static final int DEFAULT_MAX_NUM_COMMENTS = 5;
+  private static final int DEFAULT_PAGE_NUM = 1;
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    int maxNumComments = getMaxNumOfComments(request);
+    int maxNumComments = getParameter(request, "num-comments", DEFAULT_MAX_NUM_COMMENTS);
+    int pageNum = getParameter(request, "page-num", DEFAULT_PAGE_NUM);
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    List<Entity> results = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(maxNumComments));
+    PreparedQuery pq = datastore.prepare(query);
+    List<Entity> results = pq.asList(FetchOptions.Builder
+      .withOffset((pageNum-1) * maxNumComments)
+      .limit(maxNumComments));
 
     List<Comment> comments =
-    results.stream()
-    .filter(entity -> entity.hasProperty("message"))
-    .map(entity -> new Comment(entity.getKey().getId(), (String) entity.getProperty("name"), (String) entity.getProperty("message"), (long) entity.getProperty("timestamp")))
-    .collect(Collectors.toList());
+      results.stream()
+      .filter(entity -> entity.hasProperty("message"))
+      .map(entity -> new Comment(entity.getKey().getId(), (String) entity.getProperty("name"), (String) entity.getProperty("message"), (long) entity.getProperty("timestamp")))
+      .collect(Collectors.toList());
 
     response.setContentType("application/json");
     response.getWriter().println(gson.toJson(comments));
   }
 
   /**
-  *@return the max number of comments parameter of the request or DEFAULT_MAX_NUM_COMMENTS if invalid. 
+  *@return the request parameter or default value if invalid. 
   */
-  private int getMaxNumOfComments(HttpServletRequest request) {
-    String maxNumCommentsString = request.getParameter("max");
-    int maxNumComments;
+  private int getParameter(HttpServletRequest request, String parameterName, int defaultValue) {
+    String parameterString = request.getParameter(parameterName);
+    int parameter;
     try {
-      maxNumComments = Integer.parseInt(maxNumCommentsString);
+      parameter = Integer.parseInt(parameterString);
     } catch (NumberFormatException e) {
-      return DEFAULT_MAX_NUM_COMMENTS;
+      return defaultValue;
     }
-    return maxNumComments;
+    return parameter;
   }
 }

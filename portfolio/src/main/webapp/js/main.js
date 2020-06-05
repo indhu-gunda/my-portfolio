@@ -23,14 +23,44 @@ $(document).ready(function(){
 })
 
 function getComments() {
-  let max = document.getElementById('num-comments').value;
-  fetch('/list-comments?max=' + max).then(response => response.json()).then((comments) => {
-    const commentsListElement = document.getElementById('comments-container');
-    commentsListElement.innerHTML = '';
-    comments.forEach(comment => {
-      commentsListElement.appendChild(createCommentElement(comment));
+  let numCommentsPerPage = document.getElementById('num-comments').value;
+  let numPages = setupPagination(numCommentsPerPage);
+  numPages.then(() => {
+    fetch('/list-comments?num-comments=' + numCommentsPerPage + '&page-num=' + currentPage()).then(response => response.json()).then((comments) => {
+      const commentsListElement = document.getElementById('comments-container');
+      commentsListElement.innerHTML = '';
+      comments.forEach(comment => {
+        commentsListElement.appendChild(createCommentElement(comment));
+      });
     });
   });
+}
+
+async function setupPagination(numCommentsPerPage) {
+  return fetch('/num-comments').then(response => response.text()).then((numCommentsString) => {
+    let numComments = parseInt(numCommentsString);
+    let numPages = Math.ceil(numComments/numCommentsPerPage);
+    const pageSelectElement = document.getElementById('page-num');
+
+    let savedPage = pageSelectElement.options.length > 0 ? pageSelectElement.value : 1;
+    
+    /* remove old options first */
+    for (var i = pageSelectElement.options.length - 1; i >= 0; i--) {
+      pageSelectElement.remove(i);
+    }
+
+    for(var i = 1; i <= numPages; i++) {
+      const optionElement = document.createElement('option');
+      optionElement.value = i;
+      optionElement.innerText = i + " of " + numPages;
+      pageSelectElement.appendChild(optionElement);
+    }
+    pageSelectElement.value = savedPage <= numPages ? savedPage : 1;
+  });
+}
+
+function currentPage() {
+  return document.getElementById('page-num').value;
 }
 
 /** Creates an element that represents a comment, including its delete button. */
