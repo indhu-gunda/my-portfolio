@@ -43,7 +43,11 @@ function createCommentElement(comment) {
   profileElement.innerText = 'account_circle';
 
   const messageBoxElement = createMessageBoxElement(comment);
-  const deleteButtonElement = createDeleteButtonElement(comment);
+  const deleteButtonElement = createDeleteButtonElement();
+  deleteButtonElement.addEventListener('click', () => {
+    deleteComment(comment);
+    commentElement.remove();
+  });
 
   commentElement.appendChild(profileElement);
   commentElement.appendChild(messageBoxElement);
@@ -65,17 +69,12 @@ function createMessageBoxElement(comment) {
   return messageBoxElement;
 }
 
-function createDeleteButtonElement(comment) {
+function createDeleteButtonElement() {
   const deleteButtonElement = document.createElement('button');
   const deleteIconElement = document.createElement('i');
   deleteIconElement.className = 'material-icons delete col-lg-1 col-md-1 col-sm-1';
   deleteIconElement.innerText = 'close';
   deleteButtonElement.appendChild(deleteIconElement);
-
-  deleteButtonElement.addEventListener('click', () => {
-    deleteComment(comment);
-    commentElement.remove();
-  });
   return deleteButtonElement;
 }
 
