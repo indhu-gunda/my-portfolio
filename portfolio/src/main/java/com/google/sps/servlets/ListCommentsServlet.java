@@ -53,7 +53,7 @@ public class ListCommentsServlet extends HttpServlet {
     List<Comment> comments =
     results.stream()
     .filter(entity -> entity.hasProperty("message"))
-    .map(entity -> new Comment(entity.getKey().getId(), (String) entity.getProperty("name"), (String) entity.getProperty("message"), (long) entity.getProperty("timestamp")))
+    .map(entity -> entityToCommentConverter(entity))
     .collect(Collectors.toList());
 
     response.setContentType("application/json");
@@ -72,5 +72,13 @@ public class ListCommentsServlet extends HttpServlet {
       return DEFAULT_MAX_NUM_COMMENTS;
     }
     return maxNumComments;
+  }
+
+  private Comment entityToCommentConverter(Entity entity) {
+      long id = entity.getKey().getId();
+      String name = (String) entity.getProperty("name");
+      String message = (String) entity.getProperty("message");
+      long timestamp = (long) entity.getProperty("timestamp");
+      return new Comment(id, name, message, timestamp);
   }
 }
