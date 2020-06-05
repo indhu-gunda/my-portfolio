@@ -74,6 +74,10 @@ function createCommentElement(comment) {
 
   const messageBoxElement = createMessageBoxElement(comment);
   const deleteButtonElement = createDeleteButtonElement(comment);
+  deleteButtonElement.addEventListener('click', () => {
+    deleteComment(comment);
+    commentElement.remove();
+  });
 
   commentElement.appendChild(profileElement);
   commentElement.appendChild(messageBoxElement);
@@ -101,11 +105,6 @@ function createDeleteButtonElement(comment) {
   deleteIconElement.className = 'material-icons delete col-lg-1 col-md-1 col-sm-1';
   deleteIconElement.innerText = 'close';
   deleteButtonElement.appendChild(deleteIconElement);
-
-  deleteButtonElement.addEventListener('click', () => {
-    deleteComment(comment);
-    commentElement.remove();
-  });
   return deleteButtonElement;
 }
 
