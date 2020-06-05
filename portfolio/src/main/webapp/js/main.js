@@ -26,7 +26,9 @@ function getComments() {
   let numCommentsPerPage = document.getElementById('num-comments').value;
   let numPages = setupPagination(numCommentsPerPage);
   numPages.then(() => {
-    fetch('/list-comments?num-comments=' + numCommentsPerPage + '&page-num=' + currentPage()).then(response => response.json()).then((comments) => {
+    fetch('/list-comments?num-comments=' + numCommentsPerPage + '&page-num=' + currentPage())
+    .then(response => response.json())
+    .then((comments) => {
       const commentsListElement = document.getElementById('comments-container');
       commentsListElement.innerHTML = '';
       comments.forEach(comment => {
@@ -39,24 +41,31 @@ function getComments() {
 async function setupPagination(numCommentsPerPage) {
   return fetch('/num-comments').then(response => response.text()).then((numCommentsString) => {
     let numComments = parseInt(numCommentsString);
-    let numPages = Math.ceil(numComments/numCommentsPerPage);
+    /* default is one page */
+    let numPages = Math.max(Math.ceil(numComments/numCommentsPerPage), 1);
     const pageSelectElement = document.getElementById('page-num');
-
-    let savedPage = pageSelectElement.options.length > 0 ? pageSelectElement.value : 1;
     
-    /* remove old options first */
-    for (var i = pageSelectElement.options.length - 1; i >= 0; i--) {
-      pageSelectElement.remove(i);
+    if(pageSelectElement.options.length != numPages) {
+      updateOptions(pageSelectElement, numPages);
     }
-
-    for(var i = 1; i <= numPages; i++) {
-      const optionElement = document.createElement('option');
-      optionElement.value = i;
-      optionElement.innerText = i + " of " + numPages;
-      pageSelectElement.appendChild(optionElement);
-    }
-    pageSelectElement.value = savedPage <= numPages ? savedPage : 1;
   });
+}
+
+function updateOptions(pageSelectElement, numPages) {
+  let savedPage = pageSelectElement.options.length > 0 ? pageSelectElement.value : 1;
+
+  /* remove old options first */
+  for (var i = pageSelectElement.options.length - 1; i >= 0; i--) {
+    pageSelectElement.remove(i);
+  }
+
+  for(var i = 1; i <= numPages; i++) {
+    const optionElement = document.createElement('option');
+    optionElement.value = i;
+    optionElement.innerText = i + " of " + numPages;
+    pageSelectElement.appendChild(optionElement);
+  }
+  pageSelectElement.value = savedPage <= numPages ? savedPage : 1;
 }
 
 function currentPage() {
@@ -73,7 +82,7 @@ function createCommentElement(comment) {
   profileElement.innerText = 'account_circle';
 
   const messageBoxElement = createMessageBoxElement(comment);
-  const deleteButtonElement = createDeleteButtonElement(comment);
+  const deleteButtonElement = createDeleteButtonElement();
   deleteButtonElement.addEventListener('click', () => {
     deleteComment(comment);
     commentElement.remove();
@@ -99,7 +108,7 @@ function createMessageBoxElement(comment) {
   return messageBoxElement;
 }
 
-function createDeleteButtonElement(comment) {
+function createDeleteButtonElement() {
   const deleteButtonElement = document.createElement('button');
   const deleteIconElement = document.createElement('i');
   deleteIconElement.className = 'material-icons delete col-lg-1 col-md-1 col-sm-1';
@@ -112,6 +121,6 @@ function createDeleteButtonElement(comment) {
 function deleteComment(comment) {
   const params = new URLSearchParams();
   params.append('id', comment.id);
-  fetch('/delete-comment', {method: 'POST', body: params});
+  fetch('/delete-comment', {method: 'POST', body: params}).then(getComments());
 }
 

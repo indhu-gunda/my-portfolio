@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="css/main.css">
   </head>
-  <body onload="getComments()">
+  <body onload=getComments()>
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg fixed-top ">
       <a class="navbar-brand" href="#">Home</a>
@@ -198,7 +198,9 @@
             <option value="15">15</option>
           </select>
           <label for="page-num">Page:</label>
-          <select id="page-num" name="page-num" onchange=getComments()></select>
+          <select id="page-num" name="page-num" onchange=getComments()>
+            <option value="1">1 of 1</option>
+          </select>
         </form>
         <ul class= "comments-container" id="comments-container">
         </ul>
