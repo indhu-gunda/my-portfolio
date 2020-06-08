@@ -58,7 +58,7 @@ public class ListCommentsServlet extends HttpServlet {
     List<Comment> comments =
     results.stream()
     .filter(entity -> entity.hasProperty("message"))
-    .map(entity -> entityToCommentConverter(entity))
+    .map(entity -> Comment.entityToCommentConverter(entity))
     .collect(Collectors.toList());
 
     response.setContentType("application/json");
