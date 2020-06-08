@@ -1,13 +1,13 @@
  @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-html,h1,h2,h3,h4,h5,h6,a{
+html,h1,h2,h3,h4,h5,h6,a {
 	font-family: "Roboto";
 }
 .navbar{
   background: #6a788d;
 }
 
-.nav-link, .navbar-brand{
+.nav-link, .navbar-brand {
   color:#ffffff; 
   cursor: pointer;
 }
@@ -16,41 +16,41 @@ html,h1,h2,h3,h4,h5,h6,a{
   margin-right: 1em !important;
 }
 
-.nav-link:hover, .navbar-brand:hover{
+.nav-link:hover, .navbar-brand:hover {
   background: #ffffff; 
   color: #6a788d;
 }
 
-.navbar-collapse{
+.navbar-collapse {
   justify-content: flex-end;
 }
 
-.navbar-toggler{
+.navbar-toggler {
   background: #ffffff !important;
 }
 
 /* header style */
-.header{
+.header {
   background-attachment: fixed;
   background-image: url('../images/backdrop.JPG');
   background-position: center;
   background-size: cover;
 }
 
-.description{
+.description {
   margin: auto;
   position: absolute;
   text-align: center;
   top: 10%;
 }
 
-.description img{
+.description img {
   display: block;
   margin: auto;
   width: 50%;
 }
 
-.description .fa{
+.description .fa {
   background: #6a788d;
   border-radius: 50%;
   color: white;
@@ -63,79 +63,79 @@ html,h1,h2,h3,h4,h5,h6,a{
   width: auto;
 }
 
-.description .fa:hover{
+.description .fa:hover {
   opacity: 0.5;
 }
 
 /* about style */
-.about{
+.about {
   margin: 4em 0;
   padding: 1em;
   position: relative;
 }
 
-.about h1{
+.about h1 {
   color: #5b5b57;
   margin: 2em;
 }
 
-.about img{
+.about img {
   border-radius: 50%;
 }
 
-.about .desc{
+.about .desc {
   border-left: 4px solid #5b5b57;
   padding: 2em;
 }
-.about .desc h3{
+.about .desc h3 {
   color: #6a788d;
 }
-.about .desc p{
+.about .desc p {
   color:#888;
   line-height: 2;
 }
 
 /* experience style */
-.experience{
+.experience {
   background: #f1ded7;
   margin: 4em 0;
   padding: 1em;
   position: relative;
 }
 
-.experience h1{
+.experience h1 {
   color: #5b5b57;
   margin: 2em;
 }
 
-.experience .card{
+.experience .card {
   box-shadow: 0 0 20px #cccccc;
   margin: 1em;
   padding: 0;
 }
 
-.experience .card-title{
+.experience .card-title {
   color: #6a788d;
   text-align: center;
 }
 
-.experience .card-subtitle{
+.experience .card-subtitle {
   border-bottom: 2px solid #5b5b57;
   color: #6a788d;
   padding-bottom: 1em;
   text-align: center;
 }
 
-.experience .card-body{
+.experience .card-body {
   padding: 1em;
 }
 
-.experience .card-body ul{
+.experience .card-body ul {
   color: #888;
   padding: 1em;
 }
 
-.experience .card-header, .card-footer{
+.experience .card-header, .card-footer {
   background: #5b5b57;
   color: #ffffff;
   text-align: center;
@@ -143,24 +143,108 @@ html,h1,h2,h3,h4,h5,h6,a{
 }
 
 /* artwork style */
-.artwork{
+.artwork {
   margin: 4em 0;
   padding: 1em;
   position: relative;
 }
 
-.artwork h1{
+.artwork h1 {
   color: #6a788d;
   margin: 2em;
 }
 
-.artwork .container{
+.artwork .container {
   background: #5b5b57;
 }
 
-.artwork img{
+.artwork img {
   display: block;
   height: 50%;
   margin: auto;
   width: 50%;
 }
+
+/* comments style */
+.comments {
+  margin: 4em 0;
+  padding: 1em;
+  position: relative;
+}
+
+.comments h1 {
+  color: #6a788d;
+  margin: 2em;
+}
+
+.comments .new-comment-form {
+  background: #f5f5f5
+}
+
+.comments .new-comment-form textarea {
+  margin-top: 1em;
+  width: 90%;
+}
+
+.comments input {
+  background: #6a788d;
+  border: none;
+  color: white;
+  margin: 0.5em;
+  padding: 0.25rem;
+}
+
+.comments .new-comment-form .comment {
+  justify-content: center;
+}
+
+.comments .new-comment-form .submit {
+  justify-content: flex-end;
+  margin-right: 2em;
+}
+
+.comments ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.comments label {
+  color: #5b5b57;
+}
+
+.comments .num-comments-form input {
+  background: #6a788d;
+  border: none;
+  color: white;
+}
+
+.comments .comments-container li {
+  border-bottom: solid 2px #f5f5f5;
+  margin: 1em;
+  padding: 1em;
+}
+
+.comments .comments-container .account {
+  color: #888;
+  font-size: 4em;
+  padding-right: 0.5em;
+}
+
+.comments .comments-container .delete {
+  color: #5b5b57
+}
+
+.comments .comments-container .name {
+  color: #5b5b57;
+  font-weight: bold;
+}
+
+.comments .comments-container .message {
+  color: #5b5b57;
+}
+
+.comments .comments-container button {
+  background: none;
+  border: none;
+}
+
