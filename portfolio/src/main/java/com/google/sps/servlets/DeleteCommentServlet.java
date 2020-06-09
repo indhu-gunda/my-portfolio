@@ -42,7 +42,7 @@ public class DeleteCommentServlet extends HttpServlet {
   }
 
   /**
-  *@return the comment id parameter of the request or -1 if invalid and set error code. 
+  * Returns the comment id parameter of the request or -1 if invalid and set error code. 
   */
   private long getCommentID(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String commentIDString = request.getParameter("id");

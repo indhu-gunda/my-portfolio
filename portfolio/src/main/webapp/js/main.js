@@ -24,9 +24,8 @@ $(document).ready(function(){
 
 function getComments() {
   let numCommentsPerPage = document.getElementById('num-comments').value;
-  let numPages = setupPagination(numCommentsPerPage);
-  numPages.then(() => {
-    fetch('/list-comments?num-comments=' + numCommentsPerPage + '&page-num=' + currentPage())
+  setupPagination(numCommentsPerPage).then(() => {
+    fetch(`/list-comments?num-comments=${numCommentsPerPage}&page-num=${currentPage()}`)
     .then(response => response.json())
     .then((comments) => {
       const commentsListElement = document.getElementById('comments-container');
@@ -41,20 +40,20 @@ function getComments() {
 async function setupPagination(numCommentsPerPage) {
   return fetch('/num-comments').then(response => response.text()).then((numCommentsString) => {
     let numComments = parseInt(numCommentsString);
-    /* default is one page */
-    let numPages = Math.max(Math.ceil(numComments/numCommentsPerPage), 1);
+    // default is one page
+    let numPages = Math.max(Math.ceil(numComments / numCommentsPerPage), 1);
     const pageSelectElement = document.getElementById('page-num');
     
-    if(pageSelectElement.options.length != numPages) {
+    if(pageSelectElement.options.length !== numPages) {
       updateOptions(pageSelectElement, numPages);
     }
   });
 }
 
 function updateOptions(pageSelectElement, numPages) {
-  let savedPage = pageSelectElement.options.length > 0 ? pageSelectElement.value : 1;
+  let savedPage = pageSelectElement.value;
 
-  /* remove old options first */
+  // remove old options first
   for (var i = pageSelectElement.options.length - 1; i >= 0; i--) {
     pageSelectElement.remove(i);
   }
@@ -62,10 +61,10 @@ function updateOptions(pageSelectElement, numPages) {
   for(var i = 1; i <= numPages; i++) {
     const optionElement = document.createElement('option');
     optionElement.value = i;
-    optionElement.innerText = i + " of " + numPages;
+    optionElement.innerText = `${i} of ${numPages}`;
     pageSelectElement.appendChild(optionElement);
   }
-  pageSelectElement.value = savedPage <= numPages ? savedPage : 1;
+  pageSelectElement.value = savedPage <= numPages ? savedPage : numPages;
 }
 
 function currentPage() {

@@ -66,7 +66,7 @@ public class ListCommentsServlet extends HttpServlet {
   }
 
   /**
-  *@return the request parameter or default value if invalid. 
+  * Returns the request parameter or default value if invalid. 
   */
   private int getParameter(HttpServletRequest request, String parameterName, int defaultValue) {
     String parameterString = request.getParameter(parameterName);
@@ -77,13 +77,5 @@ public class ListCommentsServlet extends HttpServlet {
       return defaultValue;
     }
     return parameter;
-  }
-
-  private Comment entityToCommentConverter(Entity entity) {
-      long id = entity.getKey().getId();
-      String name = (String) entity.getProperty("name");
-      String message = (String) entity.getProperty("message");
-      long timestamp = (long) entity.getProperty("timestamp");
-      return new Comment(id, name, message, timestamp);
   }
 }
