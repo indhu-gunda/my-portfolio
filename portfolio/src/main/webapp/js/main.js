@@ -33,7 +33,6 @@ function getComments() {
       comments.forEach(comment => {
         commentsListElement.appendChild(createCommentElement(comment));
       });
-      window.location = "#comments";
     });
   });
 }
@@ -141,6 +140,7 @@ function onNewComment() {
   params.append('text-input', newCommentElement.value);
   fetch('/new-comment', {method: 'POST', body: params}).then(getComments());
   newCommentElement.value = '';
+  window.location = "#comments";
 }
 
 function signOut() {

@@ -22,8 +22,9 @@ public final class Comment {
   public static Comment entityToCommentConverter(Entity entity) {
     long id = entity.getKey().getId();
     String name = (String) entity.getProperty("name");
+    String profile = (String) entity.getProperty("profile");
     String message = (String) entity.getProperty("message");
     long timestamp = (long) entity.getProperty("timestamp");
-    return new Comment(id, name, message, timestamp);
+    return new Comment(id, name, profile, message, timestamp);
   }
 }
