@@ -34,6 +34,7 @@ function getComments() {
       comments.forEach(comment => {
         commentsListElement.appendChild(createCommentElement(comment));
       });
+      window.location = "#comments";
     });
   });
 }
@@ -77,9 +78,9 @@ function createCommentElement(comment) {
   const commentElement = document.createElement('li');
   commentElement.className = 'row align-items-center';
 
-  const profileElement = document.createElement('i');
-  profileElement.className = 'material-icons account col-lg-1 col-md-1 col-sm-1';
-  profileElement.innerText = 'account_circle';
+  const profileElement = document.createElement('img');
+  profileElement.className = 'account col-lg-1 col-md-1 col-sm-1';
+  profileElement.src = comment.profile;
 
   const messageBoxElement = createMessageBoxElement(comment);
   const deleteButtonElement = createDeleteButtonElement();
@@ -124,3 +125,30 @@ function deleteComment(comment) {
   fetch('/delete-comment', {method: 'POST', body: params}).then(getComments());
 }
 
+function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  document.getElementById('name').innerText = profile.getName();
+  document.getElementById('profile').src = profile.getImageUrl();
+  document.getElementById('new-comment-form').style.display = "block";
+  document.getElementById('signin-section').style.display = "none";
+  document.getElementById('signout').style.display = "block";
+}
+
+function onNewComment() {
+  const params = new URLSearchParams();
+  params.append('name', document.getElementById('name').innerText);
+  params.append('profile', document.getElementById('profile').src);
+  let newCommentElement = document.getElementById('text-input');
+  params.append('text-input', newCommentElement.value);
+  fetch('/new-comment', {method: 'POST', body: params}).then(getComments());
+  newCommentElement.value = '';
+}
+
+function signOut() {
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    document.getElementById('new-comment-form').style.display = "none";
+    document.getElementById('signin-section').style.display = "block";
+    window.location = "#comments";
+  });
+}
