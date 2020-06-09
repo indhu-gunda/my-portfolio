@@ -1,5 +1,7 @@
 package com.google.sps.data;
 
+import com.google.appengine.api.datastore.Entity;
+
 /** A comment in the comments section. */
 public final class Comment {
 
@@ -15,5 +17,13 @@ public final class Comment {
     this.profile = profile;
     this.message = message;
     this.timestamp = timestamp;
+  }
+
+  public static Comment entityToCommentConverter(Entity entity) {
+    long id = entity.getKey().getId();
+    String name = (String) entity.getProperty("name");
+    String message = (String) entity.getProperty("message");
+    long timestamp = (long) entity.getProperty("timestamp");
+    return new Comment(id, name, message, timestamp);
   }
 }
