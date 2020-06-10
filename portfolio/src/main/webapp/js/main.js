@@ -151,3 +151,38 @@ function signOut() {
     window.location = "#comments";
   });
 }
+
+function initMap() {
+  let map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 40, lng: -100},
+    zoom: 5,
+    styles: mapStyle
+  });
+
+  var mapStyle = [{
+    'featureType': 'all',
+    'elementType': 'all',
+    'stylers': [{'visibility': 'off'}]
+  }, {
+    'featureType': 'landscape',
+    'elementType': 'geometry',
+    'stylers': [{'visibility': 'on'}, {'color': '#fcfcfc'}]
+  }, {
+    'featureType': 'water',
+    'elementType': 'labels',
+    'stylers': [{'visibility': 'off'}]
+  }, {
+    'featureType': 'water',
+    'elementType': 'geometry',
+    'stylers': [{'visibility': 'on'}, {'hue': '#5f94ff'}, {'lightness': 60}]
+  }];
+
+  // loadMapShapes();
+
+}
+
+/** Loads the state boundary polygons from a GeoJSON source. */
+function loadMapShapes() {
+  // load US state outline polygons from a GeoJSON file
+  map.data.loadGeoJson('https://storage.googleapis.com/mapsdevsite/json/states.js', { idPropertyName: 'STATE' });
+}
