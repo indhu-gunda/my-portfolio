@@ -153,12 +153,6 @@ function signOut() {
 }
 
 function initMap() {
-  let map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 40, lng: -100},
-    zoom: 5,
-    styles: mapStyle
-  });
-
   var mapStyle = [{
     'featureType': 'all',
     'elementType': 'all',
@@ -176,13 +170,77 @@ function initMap() {
     'elementType': 'geometry',
     'stylers': [{'visibility': 'on'}, {'hue': '#5f94ff'}, {'lightness': 60}]
   }];
+  
+  let map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 40, lng: -100},
+    zoom: 5,
+    styles: mapStyle
+  });
 
-  // loadMapShapes();
+  loadMapShapes(map);
 
 }
 
 /** Loads the state boundary polygons from a GeoJSON source. */
-function loadMapShapes() {
+function loadMapShapes(map) {
   // load US state outline polygons from a GeoJSON file
-  map.data.loadGeoJson('https://storage.googleapis.com/mapsdevsite/json/states.js', { idPropertyName: 'STATE' });
+  map.data.loadGeoJson('https://storage.googleapis.com/mapsdevsite/json/states.js', { idPropertyName: 'gx_id' });
+  // wait for the request to complete by listening for the first feature to be added
+  google.maps.event.addListenerOnce(map.data, 'addfeature', function() {
+    loadDessertVotesData(map).then(map.data.setStyle(setMapStyle));
+  });
+
+}
+
+async function loadDessertVotesData(map) {
+  return fetch('/list-state-dessert-votes').then(response => response.json()).then(statesData => {
+    statesData.forEach(stateData => {
+      let feature = map.data.getFeatureById(stateData.state);
+      feature.setProperty('cheesecake-votes', stateData.cheesecakeVotes)
+      feature.setProperty('apple-pie-votes', stateData.applePieVotes)
+      feature.setProperty('chocolate-chip-cookies-votes', stateData.chocolateChipCookiesVotes)
+      feature.setProperty('tiramisu-votes', stateData.tiramisuVotes)
+      feature.setProperty('chocolate-cake-votes', stateData.chocolateCakeVotes);
+    });
+  });
+}
+
+function setMapStyle(feature) {
+  var dessertCategories = 
+  [
+    'cheesecake-votes', 
+    'apple-pie-votes', 
+    'chocolate-chip-cookies-votes', 
+    'tiramisu-votes', 
+    'chocolate-cake-votes'
+  ]
+
+  var colors = ['white', 'red', 'brown', 'yellow', 'black'];
+
+  var dessertVotes = dessertCategories.map(dessert => feature.getProperty(dessert));
+  stateColor = colors[indexOfMax(dessertVotes)];
+
+
+  return {
+    fillColor: stateColor,
+    fillOpacity: 0.75,
+  };
+}
+
+function indexOfMax(arr) {
+    if (arr.length === 0) {
+        return -1;
+    }
+
+    var max = arr[0];
+    var maxIndex = 0;
+
+    for (var i = 1; i < arr.length; i++) {
+        if (arr[i] > max) {
+            maxIndex = i;
+            max = arr[i];
+        }
+    }
+
+    return maxIndex;
 }

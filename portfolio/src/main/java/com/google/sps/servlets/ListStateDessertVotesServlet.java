@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
+import java.util.stream.IntStream;
 import java.util.stream.Collectors;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,17 +30,13 @@ public class ListStateDessertVotesServlet extends HttpServlet {
 
   private static final Gson gson = new Gson();
   private static final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-  private static final String [] states = new String [] {"AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC",  
-    "DE", "FL", "GA", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA",  
-    "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE",  
-    "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC",  
-    "SD", "TN", "TX", "UT", "VA", "VT", "WA", "WI", "WV", "WY"};
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     List<StateDessertVotes> stateDessertVotesList =
-      Stream.of(states)
-      .map(state -> createStateDessertVotes(state))
+      IntStream.range(1,52)
+      .mapToObj(String::valueOf)
+      .map(stateId -> createStateDessertVotes(stateId))
       .collect(Collectors.toList());
 
     response.setContentType("application/json");
