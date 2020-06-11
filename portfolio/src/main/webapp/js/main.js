@@ -170,7 +170,7 @@ function initMap() {
     'elementType': 'geometry',
     'stylers': [{'visibility': 'on'}, {'hue': '#5f94ff'}, {'lightness': 60}]
   }];
-  
+
   let map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 40, lng: -100},
     zoom: 5,
