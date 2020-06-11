@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="css/main.css">
   </head>
-  <body onload="getComments()">
+  <body onload=getComments()>
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg fixed-top ">
       <a class="navbar-brand" href="#">Home</a>
@@ -42,7 +42,9 @@
              <li class="nav-item">
               <a class="nav-link" data-value="artwork" href="#">Artwork</a>
             </li>
-
+            <li class="nav-item">
+              <a class="nav-link" data-value="comments" href="#">Comments</a>
+            </li>
           </ul>
       </div>
     </nav>
@@ -187,14 +189,18 @@
               <input type="submit"/>
             </li>
           </ul>
-        </form class="num-comments-form">
-          <label for="num-comments">Choose number of comments to be displayed:</label>
-          <select id="num-comments" name="num-comments">
+        </form>
+        </form class="comments-form">
+          <label for="num-comments">Comments per page:</label>
+          <select id="num-comments" name="num-comments" onchange=getComments()>
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="15">15</option>
           </select>
-          <input type="submit" class="submit" onclick=getComments()>
+          <label for="page-num">Page:</label>
+          <select id="page-num" name="page-num" onchange=getComments()>
+            <option value="1">1 of 1</option>
+          </select>
         </form>
         <ul class= "comments-container" id="comments-container">
         </ul>

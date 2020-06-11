@@ -23,14 +23,52 @@ $(document).ready(function(){
 })
 
 function getComments() {
-  let max = document.getElementById('num-comments').value;
-  fetch('/list-comments?max=' + max).then(response => response.json()).then((comments) => {
-    const commentsListElement = document.getElementById('comments-container');
-    commentsListElement.innerHTML = '';
-    comments.forEach(comment => {
-      commentsListElement.appendChild(createCommentElement(comment));
+  let numCommentsPerPage = document.getElementById('num-comments').value;
+  setupPagination(numCommentsPerPage).then(() => {
+    fetch(`/list-comments?num-comments=${numCommentsPerPage}&page-num=${currentPage()}`)
+    .then(response => response.json())
+    .then((comments) => {
+      const commentsListElement = document.getElementById('comments-container');
+      commentsListElement.innerHTML = '';
+      comments.forEach(comment => {
+        commentsListElement.appendChild(createCommentElement(comment));
+      });
     });
   });
+}
+
+async function setupPagination(numCommentsPerPage) {
+  return fetch('/num-comments').then(response => response.text()).then((numCommentsString) => {
+    let numComments = parseInt(numCommentsString);
+    // default is one page
+    let numPages = Math.max(Math.ceil(numComments / numCommentsPerPage), 1);
+    const pageSelectElement = document.getElementById('page-num');
+    
+    if(pageSelectElement.options.length !== numPages) {
+      updateOptions(pageSelectElement, numPages);
+    }
+  });
+}
+
+function updateOptions(pageSelectElement, numPages) {
+  let savedPage = pageSelectElement.value;
+
+  // remove old options first
+  for (var i = pageSelectElement.options.length - 1; i >= 0; i--) {
+    pageSelectElement.remove(i);
+  }
+
+  for(var i = 1; i <= numPages; i++) {
+    const optionElement = document.createElement('option');
+    optionElement.value = i;
+    optionElement.innerText = `${i} of ${numPages}`;
+    pageSelectElement.appendChild(optionElement);
+  }
+  pageSelectElement.value = savedPage <= numPages ? savedPage : numPages;
+}
+
+function currentPage() {
+  return document.getElementById('page-num').value;
 }
 
 /** Creates an element that represents a comment, including its delete button. */
@@ -82,6 +120,6 @@ function createDeleteButtonElement() {
 function deleteComment(comment) {
   const params = new URLSearchParams();
   params.append('id', comment.id);
-  fetch('/delete-comment', {method: 'POST', body: params});
+  fetch('/delete-comment', {method: 'POST', body: params}).then(getComments());
 }
 

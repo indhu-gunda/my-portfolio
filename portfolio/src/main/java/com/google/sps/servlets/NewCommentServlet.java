@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/** Servlet that adds a new comment to the Datastore.*/
 @WebServlet("/new-comment")
 public class NewCommentServlet extends HttpServlet {
   @Override
