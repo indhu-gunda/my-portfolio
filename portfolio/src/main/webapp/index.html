@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <meta name="google-signin-client_id" content="230403749181-iva0bs4ojsc503qlbp3j7if45is67eh4.apps.googleusercontent.com">
     <title>Indhu's Portfolio</title>
     <!-- add bootstrap css file -->
     <link 
@@ -177,16 +178,24 @@
     <div name="comments" class="comments" id="comments">
       <h1 class="text-center">Comments</h1>
       <div class="container">
-        <form action="/new-comment" method="POST" class="new-comment-form">
+        <div class="signin-section row align-items-center" id="signin-section">
+          <p class="signin-text" id="signin-text">To comment, please sign in:</p>
+          <div class="g-signin2" id="g-signin-2" data-onsuccess="onSignIn"></div>
+        </div>
+        <form class="new-comment-form" id="new-comment-form">
           <ul>
-            <li class="row comment">
-              <textarea name="name-input" placeholder="Name"></textarea>
+            <li class="row align-items-center">
+              <img id="profile" class="profile col-lg-1 col-md-1 col-sm-1" alt="profile">
+              <p id="name" class="name col-lg-10 col-md-10 col-sm-10" placeholder="Name"></p>
             </li>
             <li class="row comment new-comment">
-              <textarea name="text-input" placeholder="Share your thoughts ..."></textarea>
+              <textarea id="text-input" placeholder="Share your thoughts ..."></textarea>
             </li>
             <li class="row submit">
-              <input type="submit"/>
+              <input type="submit" class="submit" onclick=onNewComment()>
+            </li>
+            <li class="row submit">
+              <a href="#" onclick=signOut() class="signout" id="signout">Sign out</a>
             </li>
           </ul>
         </form>
@@ -213,5 +222,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <!-- add Javascript file from js file -->
   <script type="text/javascript" src="js/main.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
   </body>
 </html>

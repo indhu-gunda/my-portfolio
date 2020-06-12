@@ -7,12 +7,14 @@ public final class Comment {
 
   private final long id;
   private final String name;
+  private final String profile;
   private final String message;
   private final long timestamp;
 
-  public Comment(long id, String name, String message, long timestamp) {
+  public Comment(long id, String name, String profile, String message, long timestamp) {
     this.id = id;
     this.name = name;
+    this.profile = profile;
     this.message = message;
     this.timestamp = timestamp;
   }
@@ -20,8 +22,9 @@ public final class Comment {
   public static Comment entityToCommentConverter(Entity entity) {
     long id = entity.getKey().getId();
     String name = (String) entity.getProperty("name");
+    String profile = (String) entity.getProperty("profile");
     String message = (String) entity.getProperty("message");
     long timestamp = (long) entity.getProperty("timestamp");
-    return new Comment(id, name, message, timestamp);
+    return new Comment(id, name, profile, message, timestamp);
   }
 }
