@@ -77,7 +77,7 @@ function createCommentElement(comment) {
   commentElement.className = 'row align-items-center';
 
   const profileElement = document.createElement('img');
-  profileElement.className = 'account col-lg-1 col-md-1 col-sm-1';
+  profileElement.className = 'account col-lg-1 col-md-2 col-sm-2';
   profileElement.src = comment.profile;
 
   const messageBoxElement = createMessageBoxElement(comment);
@@ -95,7 +95,7 @@ function createCommentElement(comment) {
 
 function createMessageBoxElement(comment) {
   const messageBoxElement = document.createElement('div');
-  messageBoxElement.className = 'col-lg-10 col-md-10 col-sm-10';
+  messageBoxElement.className = 'col-lg-10 col-md-8 col-sm-8';
   const nameElement = document.createElement('p');
   nameElement.className = 'name';
   nameElement.innerText = comment.name;
@@ -110,7 +110,7 @@ function createMessageBoxElement(comment) {
 function createDeleteButtonElement() {
   const deleteButtonElement = document.createElement('button');
   const deleteIconElement = document.createElement('i');
-  deleteIconElement.className = 'material-icons delete col-lg-1 col-md-1 col-sm-1';
+  deleteIconElement.className = 'material-icons delete col-lg-1 col-md-2 col-sm-2';
   deleteIconElement.innerText = 'close';
   deleteButtonElement.appendChild(deleteIconElement);
   return deleteButtonElement;
