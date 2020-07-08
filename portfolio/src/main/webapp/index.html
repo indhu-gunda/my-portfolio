@@ -176,17 +176,41 @@
 
     <!-- Maps section -->
     <div class="dessert-map" id="dessert-map">
+      <h1 class="text-center">United States of Desserts</h1>
+      <div id="data-box" class="nicebox data-box">
+        <label id="data-label" for="data-value">Key</label>
+        <ul>
+          <li>
+            <p class="cheesecake-value" id="cheesecake-value">Cheesecake: </p>
+          </li>
+          <li>
+            <p class="apple-pie-value" id="apple-pie-value">Apple Pie: </p>
+          </li>
+          <li>
+            <p class="chocolate-chip-cookies-value" id="chocolate-chip-cookies-value">Chocolate Chip Cookies: </p>
+          </li>
+          <li>
+            <p class="tiramisu-value" id="tiramisu-value">Tiramisu: </p>
+          </li>
+          <li>
+            <p class="chocolate-cake-value" id="chocolate-cake-value">Chocolate Cake: </p>
+          </li>
+        </ul>
+      </div>
       <div class="map" id="map"></div>
-      <div class="container">
+      <div align="center" class="container">
         <form action="/new-survey-response" method="POST">
-          <select name="fav-dessert">
+          <h3 class="row">Vote for your favorite dessert!</h3>
+          <label for="fav-dessert">Favorite Dessert:</label>
+          <select name="fav-dessert" class="row">
             <option value="cheesecake">Cheesecake</option>
             <option value="apple pie">Apple Pie</option>
             <option value="chocolate chip cookies">Chocolate Chip Cookies</option>
             <option value="tiramisu">Tiramisu</option>
             <option value="chocolate cake">Chocolate Cake</option>
           </select>
-          <select name="state">
+          <label for="state">State:</label>
+          <select name="state" class="row">
             <option value="1">Alabama</option>
             <option value="2">Alaska</option>
             <option value="3">Arizona</option>
@@ -239,7 +263,7 @@
             <option value="50">Wisconsin</option>
             <option value="51">Wyoming</option>
           </select>	
-          <input type="submit" value="Submit">
+          <input type="submit" value="Submit" class="row">
         </form>
       </div>
     </div>

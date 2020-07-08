@@ -274,9 +274,98 @@ html,h1,h2,h3,h4,h5,h6,a {
   background: none;
   border: none;
   outline: none;
-}
+} 
 
 /* maps style */
+.dessert-map {
+  margin: 4em 0;
+  padding: 1em;
+  position: relative;
+}
+
+.dessert-map h1 {
+  color: #5b5b57;
+  margin: 2em;
+}
+
+.dessert-map h3 {
+  color: #5b5b57;
+  justify-content: center;
+  margin: 2em;
+}
+
+.dessert-map select {
+  border: none;
+  color: #5b5b57;
+  justify-content: center;
+  margin-bottom: 1em;
+  padding: 1em;
+  width: 50%;
+}
+
+.dessert-map input {
+  background: #6a788d;
+  border: none;
+  color: white;
+  justify-content: center;
+  padding: 0.25rem;
+  width: 50%;
+}
+
 .map {
   height: 50em;
+}
+
+.nicebox {
+  position: absolute;
+  text-align: center;
+  font-family: "Roboto", "Arial", sans-serif;
+  font-size: 13px;
+  z-index: 5;
+  box-shadow: 0 4px 6px -4px #333;
+  padding: 5px 10px;
+  background: rgb(255,255,255);
+  background: linear-gradient(to bottom,rgba(255,255,255,1) 0%,rgba(245,245,245,1) 100%);
+  border: rgb(229, 229, 229) 1px solid;
+}
+
+.data-box {
+  margin: 4em;
+  margin-top: 10em;
+  width: 10%
+}
+
+.data-box ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+
+.data-box p {
+  font-size: 1em;
+}
+
+.data-box label {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.data-box .cheesecake-value {
+  background-color: #f1ded7;
+}
+
+.data-box .apple-pie-value {
+  background-color: #c3c9d1;
+}
+
+.data-box .chocolate-chip-cookies-value {
+  background-color: #c9bcc9;
+}
+
+.data-box .tiramisu-value {
+  background-color: #ceafb5;
+}
+
+.data-box .chocolate-cake-value {
+  background-color: #c0dadb;
 }

@@ -178,7 +178,10 @@ function initMap() {
   });
 
   loadMapShapes(map);
-
+  
+  // set up the style rules and events for google.maps.Data
+  map.data.addListener('mouseover', mouseInToRegion);
+  map.data.addListener('mouseout', mouseOutOfRegion);
 }
 
 /** Loads the state boundary polygons from a GeoJSON source. */
@@ -215,13 +218,22 @@ function setMapStyle(feature) {
     'chocolate-cake-votes'
   ]
 
-  var colors = ['white', 'red', 'brown', 'yellow', 'black'];
+  var colors = ['#f1ded7', '#c3c9d1', '#c9bcc9', '#ceafb5', '#c0dadb'];
 
   var dessertVotes = dessertCategories.map(dessert => feature.getProperty(dessert));
-  stateColor = colors[indexOfMax(dessertVotes)];
+  var maxIndex = indexOfMax(dessertVotes);
+  // color gray if the state has no votes
+  var stateColor = dessertVotes[maxIndex] === 0 ? '#888' : colors[maxIndex];
 
+  var outlineWeight = 0.5, zIndex = 1;
+  if (feature.getProperty('state') === 'hover') {
+    outlineWeight = zIndex = 2;
+  }
 
   return {
+    strokeWeight: outlineWeight,
+    strokeColor: '#fff',
+    zIndex: zIndex,
     fillColor: stateColor,
     fillOpacity: 0.75,
   };
@@ -244,3 +256,39 @@ function indexOfMax(arr) {
 
     return maxIndex;
 }
+
+/**
+  * Responds to the mouse-in event on a map shape (state).
+  *
+  * @param {?google.maps.MouseEvent} e
+  */
+function mouseInToRegion(e) {
+  // set the hover state so the setStyle function can change the border
+  e.feature.setProperty('state', 'hover');
+
+  // update the label
+  document.getElementById('data-label').textContent = e.feature.getProperty('NAME');
+  document.getElementById('cheesecake-value').textContent = 
+    `Cheesecake: ${e.feature.getProperty('cheesecake-votes').toLocaleString()}`;
+  document.getElementById('apple-pie-value').textContent = 
+    `Apple Pie: ${e.feature.getProperty('apple-pie-votes').toLocaleString()}`;
+  document.getElementById('chocolate-chip-cookies-value').textContent = 
+    `Chocolate Chip Cookies: ${e.feature.getProperty('chocolate-chip-cookies-votes').toLocaleString()}`;
+  document.getElementById('tiramisu-value').textContent = 
+    `Tiramisu: ${e.feature.getProperty('tiramisu-votes').toLocaleString()}`;
+  document.getElementById('chocolate-cake-value').textContent = 
+    `Chocolate Cake: ${e.feature.getProperty('chocolate-cake-votes').toLocaleString()}`;
+  document.getElementById('data-box').style.display = 'block';
+}
+
+
+/**
+  * Responds to the mouse-out event on a map shape (state).
+  *
+  * @param {?google.maps.MouseEvent} e
+  */
+function mouseOutOfRegion(e) {
+  // reset the hover state, returning the border to normal
+  e.feature.setProperty('state', 'normal');
+}
+
