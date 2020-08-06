@@ -75,14 +75,16 @@ public final class FindMeetingQuery {
         if (first.overlaps(second)) {
           start = Math.max(start, Math.max(first.end(), second.end()));
         } else {
-          if (second.start() - start >= duration) 
+          if (second.start() - start >= duration) {
             freeTimes.add(TimeRange.fromStartEnd(start, second.start(), false));
+          }
           start = Math.max(start, second.end());
         }
         index++;
       }
-      if (TimeRange.END_OF_DAY - start >= duration) 
+      if (TimeRange.END_OF_DAY - start >= duration) {
         freeTimes.add(TimeRange.fromStartEnd(start, TimeRange.END_OF_DAY, true));
+      }
     }
     return freeTimes;
     
