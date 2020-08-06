@@ -178,7 +178,7 @@ function initMap() {
   });
 
   loadMapShapes(map);
-
+  
   // set up the style rules and events for google.maps.Data
   map.data.addListener('mouseover', mouseInToRegion);
   map.data.addListener('mouseout', mouseOutOfRegion);
