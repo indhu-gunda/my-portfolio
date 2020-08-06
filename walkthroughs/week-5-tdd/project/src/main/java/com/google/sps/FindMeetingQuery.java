@@ -27,8 +27,9 @@ public final class FindMeetingQuery {
     if (request.getDuration() > TimeRange.WHOLE_DAY.duration())
       return new ArrayList<TimeRange>();
     List<TimeRange> freeTimes = queryWithOptionalAttendees(events, request);
-    if (freeTimes.size() == 0 && request.getAttendees().size() > 0)
+    if (freeTimes.size() == 0 && request.getAttendees().size() > 0) {
       freeTimes = queryWithOnlyMandatoryAttendees(events, request);
+    }
     return freeTimes;
    
   }
