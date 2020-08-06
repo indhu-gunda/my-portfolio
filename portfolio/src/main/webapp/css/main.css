@@ -276,7 +276,28 @@ html,h1,h2,h3,h4,h5,h6,a {
   outline: none;
 } 
 
-/* maps style */
+/* dessert gallery style */
+.dessert-gallery {
+  margin: 4em 0;
+  padding: 1em;
+  position: relative;
+}
+
+.dessert-gallery h1 {
+  color: #5b5b57;
+  margin-top: 2em;
+}
+
+.dessert-gallery h4 {
+  color: #6a788d;
+  margin-bottom: 2em;
+}
+
+.dessert-gallery img {
+  margin-bottom: 1em;
+}
+
+/* dessert map style */
 .dessert-map {
   margin: 4em 0;
   padding: 1em;
